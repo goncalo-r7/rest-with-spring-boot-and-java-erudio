@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import pt.goncalorodrigues.exceptions.ExceptionResponse;
-import pt.goncalorodrigues.exceptions.UnsupportedMathOperationException;
+import pt.goncalorodrigues.exceptions.ResourceNotFoundException;
 
 import java.util.Date;
 
@@ -26,13 +26,13 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR); // exceção + genérica
     }
 
-    @ExceptionHandler(UnsupportedMathOperationException.class) // que exceção vai tratar
-    public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request){
+    @ExceptionHandler(ResourceNotFoundException.class) // que exceção vai tratar
+    public final ResponseEntity<ExceptionResponse> handleNotFoundExceptions(Exception ex, WebRequest request){
         ExceptionResponse response = new ExceptionResponse(
                 new Date(),
                 ex.getMessage(),
                 request.getDescription(false)
         );
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR); // exceção + genérica
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND); // exceção + genérica
     }
 }
