@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pt.goncalorodrigues.data.dto.PersonDTO;
 import pt.goncalorodrigues.services.PersonServices;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,13 @@ public class PersonController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public PersonDTO findById(@PathVariable("id") Long id){
-        return service.findById(id);
+        var person = service.findById(id);
+        person.setBirthday(new Date());
+        //person.setPhoneNumber("+351 999 999 999");
+        person.setPhoneNumber("");
+        person.setLastName(null);
+        person.setSensitiveData("Foo Bar");
+        return person;
     }
 
     @PostMapping(
