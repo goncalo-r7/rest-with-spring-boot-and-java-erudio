@@ -3,7 +3,7 @@ package pt.goncalorodrigues.unittests.mapper.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import pt.goncalorodrigues.data.dto.v1.PersonDTO;
+import pt.goncalorodrigues.data.dto.PersonDTO;
 import pt.goncalorodrigues.model.Person;
 
 public class MockPerson {

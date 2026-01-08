@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@RestController
+@RestController("/api/test/v1")
 public class TestLogController {
 
     private Logger logger = LoggerFactory.getLogger(TestLogController.class.getName());
 
-    @GetMapping("/test")
+    @GetMapping
     public String TestLog(){
         logger.debug("this is a DEBUG log");
         logger.info("this is an INFO log");
