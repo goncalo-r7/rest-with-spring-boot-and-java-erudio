@@ -1,4 +1,4 @@
-package pt.goncalorodrigues.data.dto;
+package pt.goncalorodrigues.data.dto.v1;
 
 import java.io.Serializable;
 import java.util.Objects;

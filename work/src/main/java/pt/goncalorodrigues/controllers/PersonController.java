@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pt.goncalorodrigues.data.dto.PersonDTO;
+import pt.goncalorodrigues.data.dto.v1.PersonDTO;
+import pt.goncalorodrigues.data.dto.v2.PersonDTOV2;
 import pt.goncalorodrigues.services.PersonServices;
 
 import java.util.List;
@@ -34,6 +35,14 @@ public class PersonController {
     )
     public PersonDTO create(@RequestBody PersonDTO person){
         return service.create(person);
+    }
+
+    @PostMapping(value = "/v2",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public PersonDTOV2 createV2(@RequestBody PersonDTOV2 person){
+        return service.createV2(person);
     }
 
     @PutMapping(
