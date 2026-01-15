@@ -15,5 +15,10 @@ spring:
     open-in-view: false
 logging:
   level:
+    root: INFO
     # root: WARN
-    pt.goncalorodrigues: DEBUG
+    # pt.goncalorodrigues: DEBUG
+spring-doc:
+  paths-to-match: /api/**/v1/**
+  swagger-ui:
+    use-root-path: true
