@@ -1,4 +1,4 @@
-package pt.goncalorodrigues.services;
+package pt.goncalorodrigues.unittests.services;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

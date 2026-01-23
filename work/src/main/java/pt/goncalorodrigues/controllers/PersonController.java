@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pt.goncalorodrigues.controllers.docs.PersonControllerDocs;
 import pt.goncalorodrigues.data.dto.PersonDTO;
-import pt.goncalorodrigues.services.PersonServices;
+import pt.goncalorodrigues.unittests.services.PersonServices;
 
 import java.util.List;
 

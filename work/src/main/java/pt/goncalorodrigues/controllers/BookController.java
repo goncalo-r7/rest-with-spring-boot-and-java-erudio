@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pt.goncalorodrigues.controllers.docs.BookControllerDocs;
 import pt.goncalorodrigues.data.dto.BookDTO;
-import pt.goncalorodrigues.services.BookServices;
+import pt.goncalorodrigues.unittests.services.BookServices;
 
 import java.util.List;
 
