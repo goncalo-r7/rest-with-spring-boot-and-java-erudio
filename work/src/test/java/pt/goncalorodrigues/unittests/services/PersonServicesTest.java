@@ -12,6 +12,7 @@ import pt.goncalorodrigues.data.dto.PersonDTO;
 import pt.goncalorodrigues.exceptions.RequiredObjectIsNullException;
 import pt.goncalorodrigues.model.Person;
 import pt.goncalorodrigues.repository.PersonRepository;
+import pt.goncalorodrigues.services.PersonServices;
 import pt.goncalorodrigues.unittests.mapper.mocks.MockPerson;
 
 import java.util.List;

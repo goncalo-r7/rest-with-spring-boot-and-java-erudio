@@ -12,6 +12,7 @@ import pt.goncalorodrigues.data.dto.BookDTO;
 import pt.goncalorodrigues.exceptions.RequiredObjectIsNullException;
 import pt.goncalorodrigues.model.Book;
 import pt.goncalorodrigues.repository.BookRepository;
+import pt.goncalorodrigues.services.BookServices;
 import pt.goncalorodrigues.unittests.mapper.mocks.MockBook;
 
 import java.util.List;

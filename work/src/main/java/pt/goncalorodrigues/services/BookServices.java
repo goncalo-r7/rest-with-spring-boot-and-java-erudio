@@ -1,4 +1,4 @@
-package pt.goncalorodrigues.unittests.services;
+package pt.goncalorodrigues.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,9 +45,9 @@ public class BookServices {
     public BookDTO create(BookDTO book){
         if(book == null) throw new RequiredObjectIsNullException();
         logger.info("Creating a book!");
-        var entity = repository.save(parseObject(book, Book.class));
+        var entity = parseObject(book, Book.class);
 
-        var dto = parseObject(entity, BookDTO.class);
+        var dto = parseObject(repository.save(entity), BookDTO.class);
         addHateoasLinks(dto);
         return dto;
     }
