@@ -87,12 +87,10 @@ class BookServicesTest {
     @Test
     void create() {
         Book book = input.mockEntity(1);
-        Book persisted = book;
-        book.setId(1L);
 
         BookDTO dto = input.mockDTO(1);
 
-        when(repository.save(book)).thenReturn(persisted);
+        when(repository.save(any(Book.class))).thenReturn(book);
 
         var result = service.create(dto);
 
