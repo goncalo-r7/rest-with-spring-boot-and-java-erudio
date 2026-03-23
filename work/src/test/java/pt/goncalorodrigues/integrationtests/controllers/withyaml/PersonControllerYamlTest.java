@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import pt.goncalorodrigues.config.TestConfigs;
 import pt.goncalorodrigues.integrationtests.controllers.withyaml.mapper.YAMLMapper;
 import pt.goncalorodrigues.integrationtests.dto.PersonDTO;
+import pt.goncalorodrigues.integrationtests.dto.wrappers.xml.PagedModelPerson;
 import pt.goncalorodrigues.integrationtests.testcontainers.AbstractIntegrationTest;
 
 import java.util.Arrays;
@@ -197,6 +198,7 @@ class PersonControllerYamlTest extends AbstractIntegrationTest {
     void findAllTest() throws JsonProcessingException {
         var response = given(specification)
                 .accept(MediaType.APPLICATION_YAML_VALUE)
+                .queryParams("page", 3, "size", 12, "direction", "asc")
                 .when()
                     .get()
                 .then()
@@ -204,30 +206,75 @@ class PersonControllerYamlTest extends AbstractIntegrationTest {
                 .contentType(MediaType.APPLICATION_YAML_VALUE)
                 .extract()
                     .body()
-                        .as(PersonDTO[].class, objectMapper);
+                        .as(PagedModelPerson.class, objectMapper);
 
-        List<PersonDTO> people = Arrays.asList(response);
+        List<PersonDTO> people = response.getContent();
 
-        PersonDTO personOne = people.get(0);
+        PersonDTO personOne = people.getFirst();
+        person = personOne;
 
         assertNotNull(personOne.getId());
         assertTrue(personOne.getId() > 0);
 
-        assertEquals("Ayrton", personOne.getFirstName());
-        assertEquals("Senna", personOne.getLastName());
-        assertEquals("Leiria", personOne.getAddress());
+        assertEquals("Allard", personOne.getFirstName());
+        assertEquals("Kornalik", personOne.getLastName());
+        assertEquals("PO Box 43915", personOne.getAddress());
         assertEquals("Male", personOne.getGender());
-        assertTrue(personOne.isEnabled());
+        assertFalse(personOne.isEnabled());
 
         PersonDTO personThree = people.get(2);
+        person = personThree;
 
         assertNotNull(personThree.getId());
         assertTrue(personThree.getId() > 0);
 
-        assertEquals("Nelson", personThree.getFirstName());
-        assertEquals("Mandela", personThree.getLastName());
-        assertEquals("South Africa", personThree.getAddress());
+        assertEquals("Allyn", personThree.getFirstName());
+        assertEquals("Velasquez", personThree.getLastName());
+        assertEquals("Room 1972", personThree.getAddress());
         assertEquals("Male", personThree.getGender());
+        assertFalse(personThree.isEnabled());
+    }
+
+    @Test
+    @Order(7)
+    void findByNameTest() throws JsonProcessingException {
+        var response = given(specification)
+            .accept(MediaType.APPLICATION_YAML_VALUE)
+            .pathParam("firstName", "nel")
+            .queryParams("page", 0, "size", 12, "direction", "asc")
+            .when()
+                .get("findPeopleByName/{firstName}")
+            .then()
+                .statusCode(200)
+            .contentType(MediaType.APPLICATION_YAML_VALUE)
+            .extract()
+                .body()
+                    .as(PagedModelPerson.class, objectMapper);
+
+        List<PersonDTO> people = response.getContent();
+
+        PersonDTO personOne = people.getFirst();
+        person = personOne;
+
+        assertNotNull(personOne.getId());
+        assertTrue(personOne.getId() > 0);
+
+        assertEquals("Cornelius", personOne.getFirstName());
+        assertEquals("Downer", personOne.getLastName());
+        assertEquals("PO Box 91521", personOne.getAddress());
+        assertEquals("Male", personOne.getGender());
+        assertFalse(personOne.isEnabled());
+
+        PersonDTO personThree = people.get(2);
+        person = personThree;
+
+        assertNotNull(personThree.getId());
+        assertTrue(personThree.getId() > 0);
+
+        assertEquals("Donella", personThree.getFirstName());
+        assertEquals("Trewhela", personThree.getLastName());
+        assertEquals("Suite 55", personThree.getAddress());
+        assertEquals("Female", personThree.getGender());
         assertTrue(personThree.isEnabled());
     }
 

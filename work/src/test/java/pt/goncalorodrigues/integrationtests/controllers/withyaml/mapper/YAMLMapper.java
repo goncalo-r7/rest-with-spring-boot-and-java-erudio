@@ -34,7 +34,7 @@ public class YAMLMapper implements ObjectMapper {
         try {
             return mapper.writeValueAsString(context.getObjectToSerialize());
         } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("Error deserializing YAML content", e);
+            throw new IllegalArgumentException("Error serializing YAML content", e);
         }
     }
 }
